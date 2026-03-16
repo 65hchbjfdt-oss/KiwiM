@@ -4,8 +4,6 @@ import 'screens/home_screen.dart';
 import 'screens/kiwiflow_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/player_screen.dart';
-import 'screens/subscription_screen.dart';
-import 'screens/admin_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -16,15 +14,13 @@ void main() async {
 
 class KiwiMusicApp extends StatelessWidget {
   const KiwiMusicApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'KiwiMusic',
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF2C0F0F), // бордово-чёрный
-        primaryColor: const Color(0xFF006400), // тёмно-зелёный
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF0A0A0A)),
+        scaffoldBackgroundColor: const Color(0xFF2C0F0F),
+        primaryColor: const Color(0xFF006400),
       ),
       home: const MainScreen(),
       debugShowCheckedModeBanner: false,
@@ -40,13 +36,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
+
   final List<Widget> _screens = [
     const HomeScreen(),
     const KiwiFlowScreen(),
     const ProfileScreen(),
-    const PlayerScreen(track: null), // откроется по нажатию
-    const SubscriptionScreen(),
-    const AdminScreen(), // только для тебя
+    const PlayerScreen(),
   ];
 
   @override
@@ -75,6 +70,14 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.play_circle), label: 'Плеер'),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF006400),
+        onPressed: () {
+          // Сюда можно добавить переход на подписку или админку
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const SubscriptionScreen())); // временно, потом уберёшь
+        },
+        child: const Icon(Icons.star),
       ),
     );
   }
