@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/home_screen.dart';
 import 'screens/kiwiflow_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/player_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  await Supabase.initialize(
+    url: 'https://kswsvpnhnowvvakgfkjz.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtzd3N2cG5obm93dnZha2dma2p6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NjY0NzYsImV4cCI6MjA4OTI0MjQ3Nn0.kCWcvUPJAw0q-pJPyD6gbiuP-ocWGhtvJvUPiY1mEX0',
+  );
+
   runApp(const KiwiMusicApp());
 }
 
 class KiwiMusicApp extends StatelessWidget {
   const KiwiMusicApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,6 +28,7 @@ class KiwiMusicApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF2C0F0F),
         primaryColor: const Color(0xFF006400),
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
       ),
       home: const MainScreen(),
       debugShowCheckedModeBanner: false,
@@ -30,6 +38,7 @@ class KiwiMusicApp extends StatelessWidget {
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -53,6 +62,7 @@ class _MainScreenState extends State<MainScreen> {
         height: 70,
         borderRadius: 30,
         blur: 20,
+        alignment: Alignment.bottomCenter,
         linearGradient: LinearGradient(
           colors: [Colors.black.withOpacity(0.6), Colors.black.withOpacity(0.3)],
         ),
@@ -63,6 +73,7 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: Colors.transparent,
           selectedItemColor: const Color(0xFF006400),
           unselectedItemColor: Colors.white70,
+          type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
             BottomNavigationBarItem(icon: Icon(Icons.waves), label: 'KiwiFlow'),
@@ -70,14 +81,6 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.play_circle), label: 'Плеер'),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF006400),
-        onPressed: () {
-          // Сюда можно добавить переход на подписку или админку
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const SubscriptionScreen())); // временно, потом уберёшь
-        },
-        child: const Icon(Icons.star),
       ),
     );
   }
