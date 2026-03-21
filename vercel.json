@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "builds": [
+    {
+      "src": "pubspec.yaml",
+      "use": "@vercel/flutter"
+    }
+  ]
+}
