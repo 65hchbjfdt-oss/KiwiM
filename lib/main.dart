@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,6 +10,7 @@ import 'screens/player_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Инициализация Supabase (одинаково для web и мобильного)
   await Supabase.initialize(
     url: 'https://kswsvpnhnowvvakgfkjz.supabase.co',
     anonKey:
@@ -25,13 +27,13 @@ class KiwiMusicApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'KiwiMusic',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF2C0F0F),
         primaryColor: const Color(0xFF006400),
         appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
       ),
       home: const MainScreen(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
