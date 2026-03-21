@@ -1,80 +1,21 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  <!-- Базовые SEO и мета для мобильных устройств -->
-  <title>KiwiMusic — бесконечный поток музыки</title>
-  <meta name="description" content="KiwiMusic: персонализированный поток треков, премиум скачивание, ремиксы и стильный дизайн">
-  <meta name="theme-color" content="#2C0F0F">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="format-detection" content="telephone=no">
+name: kiwimusic
+description: KiwiMusic Web
+publish_to: 'none'
+version: 1.0.0+1
 
-  <!-- Иконки и манифест -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="manifest" href="manifest.json">
-  
-  <!-- CanvasKit (Skia) — основной рендерер для красивого UI -->
-  <script>
-    window.flutterConfiguration = {
-      canvasKitBaseUrl: "https://unpkg.com/canvaskit-wasm@0.39.1/bin/", // или локальный путь, если скачаешь
-      renderer: "canvaskit" // или "auto" / "html" для теста
-    };
-  </script>
+environment:
+  sdk: '>=3.5.0 <4.0.0'
 
-  <!-- Основной скрипт Flutter -->
-  <script src="flutter.js" defer></script>
+dependencies:
+  flutter:
+    sdk: flutter
+  glassmorphism: ^3.0.0
+  flutter_blurhash: ^1.3.0
+  just_audio: ^0.9.48
+  just_audio_web: ^0.1.0          # обязательно для звука в веб
+  supabase_flutter: ^2.12.0
+  universal_html: ^2.2.4           # для dart:html на web
+  http: ^1.2.2                     # если будешь добавлять Jamendo
 
-  <style>
-    body {
-      margin: 0;
-      background-color: #2C0F0F; /* твой бордово-чёрный фон */
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    #loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: 1.5em;
-      text-align: center;
-    }
-    #flutter-app {
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
-</head>
-<body>
-  <!-- Загрузочный экран (пока Flutter грузится) -->
-  <div id="loading">Загрузка KiwiMusic...</div>
-
-  <!-- Контейнер для Flutter -->
-  <div id="flutter-app"></div>
-
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Убираем загрузочный текст
-      document.getElementById('loading').style.display = 'none';
-
-      // Запускаем Flutter
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: async function(engineInitializer) {
-          let appRunner = await engineInitializer.initializeEngine({
-            // Можно переопределить рендерер здесь
-            // renderer: "canvaskit",
-          });
-          await appRunner.runApp();
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+flutter:
+  uses-material-design: true
