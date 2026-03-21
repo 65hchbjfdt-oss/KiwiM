@@ -1,44 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <!--
-    Если вы хотите использовать path-based routing (без # в URL), раскомментируйте строку ниже
-    <base href="$FLUTTER_BASE_HREF">
-  -->
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="kiwimusic">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>kiwimusic</title>
-  <link rel="manifest" href="manifest.json">
-
-  <script>
-    // The value below is injected by Flutter tool during the build process.
-    var serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KiwiMusic</title>
+  <meta name="theme-color" content="#2C0F0F">
+  <style>
+    body { margin: 0; background: #2C0F0F; overflow: hidden; }
+  </style>
 </head>
 <body>
+  <div id="flutter-app"></div>
+  <script src="flutter.js" defer></script>
   <script>
     window.addEventListener('load', function(ev) {
-      // Download main.dart.js
       _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.autoStart();
+        onEntrypointLoaded: async function(engineInitializer) {
+          let appRunner = await engineInitializer.initializeEngine();
+          await appRunner.runApp();
         }
       });
     });
